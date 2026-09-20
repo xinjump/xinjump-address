@@ -4,78 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
-<title>发货信息整理单 · 发货数量规格 / 收货地址联系人</title>
+<title>发货信息解析</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="app-header">
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-logo">📦</div>
-      <div class="brand-text">
-        <h1>发货信息整理单</h1>
-        <p>发货数量规格 · 收货地址 · 联系人信息 一站式整理</p>
-      </div>
-    </div>
-    <div class="header-actions">
-      <button class="btn" id="btn-copy" type="button">📋 复制结果</button>
-      <button class="btn" id="btn-csv" type="button">📊 导出 Excel</button>
-      <button class="btn" id="btn-print" type="button">🖨️ 打印</button>
-      <button class="btn btn-danger" id="btn-clear" type="button">🗑️ 清空</button>
-      <button class="btn btn-icon" id="btn-dark" type="button" title="切换夜间模式">🌙</button>
-    </div>
+<main class="wrap">
+  <h1 class="title">发货信息解析</h1>
+  <p class="subtitle">粘贴收货信息，自动解析出收货人、联系电话、收货地址、商品、规格、数量</p>
+
+  <textarea id="input-text" class="input-text" spellcheck="false"
+    placeholder="在此粘贴收货信息，例如：&#10;广东省广州市天河区示例大道1号张三13800138000 2箱&#10;北京市朝阳区示范路88号李四13900139000 苹果10箱梨5箱"></textarea>
+
+  <div class="btn-row">
+    <button id="btn-clear" class="btn btn-del" type="button">删除</button>
+    <button id="btn-parse" class="btn btn-parse" type="button">解析</button>
   </div>
-</header>
-
-<main class="container">
-
-  <!-- ============ 单据管理 ============ -->
-  <nav class="doc-bar">
-    <div class="doc-tabs" id="doc-tabs"></div>
-    <div class="doc-ops">
-      <button class="chip-btn" id="doc-add" type="button">＋ 新建单据</button>
-      <button class="chip-btn" id="doc-rename" type="button">重命名</button>
-      <button class="chip-btn" id="doc-duplicate" type="button">复制</button>
-      <button class="chip-btn chip-danger" id="doc-remove" type="button">删除</button>
-    </div>
-  </nav>
-
-  <!-- ============ 多收货人 + 明细 ============ -->
-  <section class="card">
-    <div class="card-head">
-      <h2><span class="ico">🏠</span>收货地址与联系人 · 发货明细</h2>
-      <div class="head-actions">
-        <button class="link-btn" id="btn-parse" type="button">✨ 智能解析</button>
-        <button class="link-btn" id="btn-add-recipient" type="button">＋ 添加收货人</button>
-      </div>
-    </div>
-    <div id="recipients"></div>
-  </section>
-
-  <!-- ============ 整理结果预览 ============ -->
-  <section class="card">
-    <div class="card-head">
-      <h2><span class="ico">📄</span>整理结果预览</h2>
-      <span class="card-tip">可直接复制发送给对方</span>
-    </div>
-    <pre class="preview" id="preview"></pre>
-  </section>
-
-  <div class="footer-note">所有数据仅保存在本机浏览器，不会上传服务器</div>
 </main>
 
-<!-- ============ 打印专用视图 ============ -->
-<div class="print-view" id="print-view"></div>
-
+<!-- 解析结果弹框 -->
 <div class="modal-mask" id="modal-mask">
   <div class="modal">
     <div class="modal-head">
-      <h3 id="modal-title">标题</h3>
-      <button class="modal-close" id="modal-close" type="button">✕</button>
+      <h3>解析结果</h3>
+      <button class="modal-close" id="modal-close" type="button" title="关闭">✕</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
-    <div class="modal-foot" id="modal-foot"></div>
+    <div class="modal-foot">
+      <button class="m-btn m-btn-ghost" id="modal-copy" type="button">复制</button>
+      <button class="m-btn m-btn-primary" id="modal-close-btn" type="button">关闭</button>
+    </div>
   </div>
 </div>
 
